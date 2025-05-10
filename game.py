@@ -11,10 +11,11 @@ class Player:
     def __init__(self, pos_x: int, pos_y: int):
         self.pos_x = pos_x
         self.pos_y = pos_y
+        self.speed = 1
 
     def move(self, delta_x: int, delta_y: int):
-        self.pos_x += delta_x
-        self.pos_y += delta_y
+        self.pos_x += delta_x * self.speed
+        self.pos_y += delta_y * self.speed
 
 
 class Game:
@@ -33,6 +34,7 @@ class Game:
         self.world = World()
         self.player = Player(0, 0)
         self.config = config
+        self.held_keys = set()
 
     def draw_viewport(self):
         px, py = (self.player.pos_x, self.player.pos_y)
@@ -61,14 +63,22 @@ class Game:
                 if event.type == pygame.QUIT:
                     running = False
                 elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_UP:
-                        self.player.move(0, -1)
-                    elif event.key == pygame.K_DOWN:
-                        self.player.move(0, 1)
-                    elif event.key == pygame.K_LEFT:
-                        self.player.move(-1, 0)
-                    elif event.key == pygame.K_RIGHT:
-                        self.player.move(1, 0)
+                    self.held_keys.add(event.key)
+                elif event.type == pygame.KEYUP:
+                    self.held_keys.discard(event.key)
+
+            dx, dy = 0, 0
+
+            if pygame.K_LEFT in self.held_keys:
+                dx -= 1
+            elif pygame.K_RIGHT in self.held_keys:
+                dx += 1
+            elif pygame.K_UP in self.held_keys:
+                dy -= 1
+            elif pygame.K_DOWN in self.held_keys:
+                dy += 1
+
+            self.player.move(dx, dy)
 
             self.display_manager.clear_screen()
 
