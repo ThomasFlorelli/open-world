@@ -1,7 +1,9 @@
 import random
+
 from tile import Tile
 
 CHUNK_SIZE = 16  # 16x16 tiles
+
 
 class Chunk:
     def __init__(self, chunk_x: int, chunk_y: int, seed: int):

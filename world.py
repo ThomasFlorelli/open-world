@@ -1,5 +1,5 @@
-import random
-from chunk import Chunk, CHUNK_SIZE
+from chunk import CHUNK_SIZE, Chunk
+
 
 class World:
     def __init__(self, seed: int = 12345):
@@ -20,4 +20,3 @@ class World:
         if key not in self.chunks:
             self.chunks[key] = Chunk(chunk_x, chunk_y, self.seed)
         return self.chunks[key]
-                                       
