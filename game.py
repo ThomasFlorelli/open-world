@@ -1,4 +1,5 @@
 import os
+from chunk import CHUNK_SIZE
 
 import pygame
 
@@ -32,6 +33,7 @@ class Game:
         self.renderer = renderer
         self.world = World()
         self.player = Player(0, 0)
+        self.player_chunk = (0, 0)
         self.config = config
 
     def draw_viewport(self):
@@ -69,6 +71,15 @@ class Game:
                         self.player.move(-1, 0)
                     elif event.key == pygame.K_RIGHT:
                         self.player.move(1, 0)
+
+            player_chunk = (
+                self.player.pos_x // CHUNK_SIZE,
+                self.player.pos_y // CHUNK_SIZE,
+            )
+
+            if player_chunk != self.player_chunk:
+                self.player_chunk = player_chunk
+                self.world.update_chunks(*player_chunk)
 
             self.display_manager.clear_screen()
 
