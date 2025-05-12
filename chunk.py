@@ -51,7 +51,11 @@ class Chunk:
                 )
                 terrain = biome.terrains[terrain_name]
                 row.append(
-                    Tile(type=terrain.texture_id, is_obstacle=terrain.is_obstacle)
+                    Tile(
+                        type=terrain.texture_id,
+                        is_obstacle=terrain.is_obstacle,
+                        biome_name=biome_name,
+                    )
                 )
             tiles.append(row)
         return tiles

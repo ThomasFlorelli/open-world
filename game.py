@@ -5,6 +5,7 @@ import pygame
 from biome import Biome
 from config import Config
 from generation_config import GenerationConfig
+from minimap import Minimap
 from render import DisplayManager, Renderer, TextureSet
 from world import World
 
@@ -28,8 +29,8 @@ class Game:
         pygame.init()
         pygame.display.set_caption("Mini Roguelike")
         renderer = Renderer(
-            config.screen_width * config.display_texture_size,
-            config.screen_height * config.display_texture_size,
+            config.screen_width,
+            config.screen_height,
         )
         textureset = TextureSet(
             config.texture_index_map,
@@ -58,17 +59,23 @@ class Game:
 
     def draw_viewport(self):
         px, py = (self.player.pos_x, self.player.pos_y)
+        viewport_width = self.config.viewport_width // self.config.display_texture_size
+        viewport_height = (
+            self.config.viewport_height // self.config.display_texture_size
+        )
         viewport_top_left_x, viewport_top_left_y = (
-            px - self.config.viewport_width // 2,
-            py - self.config.viewport_height // 2,
+            px - viewport_width // 2,
+            py - viewport_height // 2,
         )
 
-        for y in range(self.config.viewport_height):
+        for y in range(viewport_height):
             tile_y = viewport_top_left_y + y
-            for x in range(self.config.viewport_width):
+            for x in range(viewport_width):
                 tile_x = viewport_top_left_x + x
                 self.display_manager.draw(
-                    self.world.get_tile(tile_x, tile_y).type, x, y
+                    self.world.get_tile(tile_x, tile_y).type,
+                    x * self.config.display_texture_size,
+                    y * self.config.display_texture_size,
                 )
 
         self.display_manager.draw(
@@ -100,6 +107,8 @@ class Game:
     def loop(self):
         clock = pygame.time.Clock()
         running = True
+        minimap = Minimap(self.world, self.config)
+        frame_count = 0
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -139,6 +148,11 @@ class Game:
 
             self.draw_viewport()
 
+            if frame_count == 10:
+                minimap.draw((self.player.pos_x, self.player.pos_y))
+                frame_count = 0
+            minimap.blit_to(self.renderer.screen)
+
             self.draw_overlay(
                 self.renderer.screen,
                 self.player,
@@ -146,6 +160,7 @@ class Game:
             )
 
             pygame.display.flip()
-            clock.tick(30)
+            clock.tick(20)
+            frame_count += 1
 
         pygame.quit()
