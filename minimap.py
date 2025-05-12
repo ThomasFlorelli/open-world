@@ -19,8 +19,8 @@ class Minimap:
         start_x = px - (self.width // self.scale) // 2
         start_y = py - (self.height // self.scale) // 2
 
-        for i in range(self.width):
-            for j in range(self.height):
+        for i in range(0, self.width, self.scale):
+            for j in range(0, self.height, self.scale):
                 wx = start_x + i // self.scale
                 wy = start_y + j // self.scale
                 tile = self.world.get_tile(wx, wy)
@@ -28,7 +28,11 @@ class Minimap:
                 color = biome.minimap_color if biome else (0, 0, 0)
                 if tile.is_obstacle:
                     color = tuple(int(c * 0.8) for c in color)
-                self.surface.set_at((i, j), color)
+                pygame.draw.rect(
+                    self.surface,
+                    color,
+                    (i, j, self.scale, self.scale),
+                )
 
         # Marqueur du joueur (en blanc)
         pygame.draw.rect(
