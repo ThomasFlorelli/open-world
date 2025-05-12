@@ -1,0 +1,73 @@
+player_settings:
+    pass_through_obstacles: true
+    base_speed: 4
+texture_size: 16
+display_texture_size: 32
+screen_width: 40
+screen_height: 20
+viewport_width: 40
+viewport_height: 20
+texture_path: assets/The Roguelike 1-14-8 Alpha.png
+texture_index_map:
+  player: [7, 33]
+  forest_river_1: [5, 13]
+  forest_ground_1: [4, 9]
+  forest_ground_2: [5, 9]
+  forest_tree_1: [4, 3]
+  forest_tree_2: [4, 4]
+  desert_sand_1: [10,9]
+  desert_cactus_1: [10, 3]
+  desert_cactus_2: [10, 4]
+  desert_plant_1: [10, 6]
+  desert_rock_1: [11, 8]
+  desert_water_1: [8, 13]
+  lake_water_1: [8, 13]
+biomes:
+  lake:
+      rarity: rare
+      terrains:
+          - texture_suffix: water_1
+            is_obstacle: true
+            rarity: common
+  forest:
+    rarity: common
+    terrains:
+      - texture_suffix: ground_1
+        is_obstacle: false
+        rarity: common
+      - texture_suffix: ground_2
+        is_obstacle: false
+        rarity: common
+      - texture_suffix: tree_1
+        is_obstacle: true
+        rarity: uncommon
+      - texture_suffix: tree_2
+        is_obstacle: true
+        rarity: uncommon
+      - texture_suffix: river_1
+        is_obstacle: false
+        rarity: rare
+  desert:
+    rarity: uncommon
+    terrains:
+      - texture_suffix: sand_1
+        is_obstacle: false
+        rarity: common
+      - texture_suffix: cactus_1
+        is_obstacle: true
+        rarity: rare
+      - texture_suffix: cactus_2
+        is_obstacle: true
+        rarity: rare
+      - texture_suffix: plant_1
+        is_obstacle: false
+        rarity: legendary
+      - texture_suffix: rock_1
+        is_obstacle: true
+        rarity: rare
+      - texture_suffix: water_1
+        is_obstacle: false
+        rarity: legendary
+        
+        
+        

@@ -1,0 +1,23 @@
+seed: 1874892764827346
+
+biome_scale: 40
+terrain_scale: 10
+
+biome_rarity_thresholds:
+  legendary: 0.97
+  rare: 0.85
+  uncommon: 0.5
+  common: 0.0
+
+terrain_rarity_thresholds:
+  legendary: 0.97
+  rare: 0.85
+  uncommon: 0.5
+  common: 0.0
+
+
+zone_size: 32
+
+# smoothing enum: linear, favor_common, favor_rare
+biome_noise_smoothing: favor_common
+terrain_noise_smoothing: favor_common
