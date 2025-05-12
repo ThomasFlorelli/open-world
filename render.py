@@ -2,19 +2,19 @@ import pygame
 
 
 class TextureSet:
-    # Indexes (row, column)
-    TEXTURE_INDEXES = {
-        "grass": (4, 9),
-        "rock": (9, 10),
-        "player": (4, 33),
-    }
-
-    def __init__(self, file_path: str, texture_size: int, display_texture_size: int):
+    def __init__(
+        self,
+        texture_index_map: dict[str, tuple[int, int]],
+        file_path: str,
+        texture_size: int,
+        display_texture_size: int,
+    ):
         self.texture_size = texture_size
         self.display_texture_size = display_texture_size
+        print(file_path)
         self.texturesheet = pygame.image.load(file_path).convert_alpha()
         self.textures = {
-            name: self.load_texture(idx) for name, idx in self.TEXTURE_INDEXES.items()
+            name: self.load_texture(idx) for name, idx in texture_index_map.items()
         }
 
     def load_texture(self, index):

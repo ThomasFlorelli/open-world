@@ -1,9 +1,0 @@
-{
-  "TEXTURE_SIZE": 16,
-  "DISPLAY_TEXTURE_SIZE": 32,
-  "SCREEN_WIDTH": 40,
-  "SCREEN_HEIGHT": 20,
-  "VIEWPORT_WIDTH": 40,
-  "VIEWPORT_HEIGHT": 20,
-  "TEXTURE_PATH": "assets/The Roguelike 1-14-8 Alpha.png"
-}

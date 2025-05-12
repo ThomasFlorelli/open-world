@@ -4,7 +4,9 @@ import sys
 import pygame
 
 pygame.init()
-path = os.path.join(os.path.dirname(__file__), "../assets/The Roguelike 1-14-8.png")
+path = os.path.join(
+    os.path.dirname(__file__), "../assets/The Roguelike 1-14-8 Alpha.png"
+)
 
 spritesheet = pygame.image.load(path)
 TILE_SIZE = 32
@@ -35,3 +37,4 @@ while True:
             screen.blit(text, (x * TILE_SIZE + 1, y * TILE_SIZE + 1))
 
     pygame.display.flip()
+    pygame.image.save(screen, os.path.join(os.path.dirname(__file__), "screenshot.png"))
