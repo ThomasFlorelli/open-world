@@ -75,6 +75,28 @@ class Game:
             "player", self.config.viewport_width // 2, self.config.viewport_height // 2
         )
 
+    def draw_overlay(self, screen, player, biome_name, enabled=True):
+        if not enabled:
+            return
+
+        font = pygame.font.SysFont(None, 24)
+        info_lines = [
+            f"X: {player.pos_x}",
+            f"Y: {player.pos_y}",
+            f"Biome: {biome_name}",
+        ]
+        panel_width = 200
+        panel_height = 20 * len(info_lines)
+        overlay_surface = pygame.Surface((panel_width, panel_height))
+        overlay_surface.set_alpha(150)
+        overlay_surface.fill((0, 0, 0))
+
+        for i, line in enumerate(info_lines):
+            text_surf = font.render(line, True, (255, 255, 255))
+            overlay_surface.blit(text_surf, (5, i * 20))
+
+        screen.blit(overlay_surface, (10, 10))
+
     def loop(self):
         clock = pygame.time.Clock()
         running = True
@@ -116,6 +138,12 @@ class Game:
             self.display_manager.clear_screen()
 
             self.draw_viewport()
+
+            self.draw_overlay(
+                self.renderer.screen,
+                self.player,
+                self.world.get_tile(self.player.pos_x, self.player.pos_y).type,
+            )
 
             pygame.display.flip()
             clock.tick(30)
