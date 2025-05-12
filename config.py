@@ -76,11 +76,15 @@ def test_loaded_config():
     print("\n=== BIOMES FOUND ===\n")
     for biome_name, biome_config in config.biomes.items():
         print(
-            f"== {biome_name} ==\n    Rarity: {biome_config['rarity']}\n    Terrains:"
+            f"== {biome_name} ==\n    Rarity: {biome_config['rarity']}\n"
+            + f"    Minimap color: {biome_config['minimap_color']}\n    Terrains:"
         )
+        print()
         for terrain in biome_config["terrains"]:
-            print(f"        = {terrain['texture_suffix']} =")
-            print(f"\n        Rarity: {terrain['rarity']}")
+            print(
+                f"        = {terrain['texture_suffix']} ="
+                + f"\n        Rarity: {terrain['rarity']}"
+            )
 
 
 if __name__ == "__main__":

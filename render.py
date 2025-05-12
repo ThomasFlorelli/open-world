@@ -57,8 +57,5 @@ class DisplayManager:
         texture = self.texture_set.get_texture(texture_name)
         self.renderer.draw_texture(
             texture,
-            (
-                x * self.texture_set.display_texture_size,
-                y * self.texture_set.display_texture_size,
-            ),
+            (x, y),
         )

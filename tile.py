@@ -5,3 +5,4 @@ from dataclasses import dataclass
 class Tile:
     type: str
     is_obstacle: bool
+    biome_name: str

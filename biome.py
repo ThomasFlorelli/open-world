@@ -16,9 +16,10 @@ class Terrain:
 
 
 class Biome:
-    def __init__(self, name, rarity, terrains):
+    def __init__(self, name, rarity, minimap_color, terrains):
         self.name = name
         self.rarity = rarity
+        self.minimap_color = minimap_color
         self.terrains = {terrain.texture_suffix: terrain for terrain in terrains}
         self.terrain_rarities = {
             name: terrain.rarity for name, terrain in self.terrains.items()
@@ -27,4 +28,9 @@ class Biome:
     @staticmethod
     def from_dict(name, data):
         terrains = [Terrain.from_dict(t, name) for t in data.get("terrains", [])]
-        return Biome(name, data.get("rarity", "common"), terrains)
+        return Biome(
+            name,
+            data.get("rarity", "common"),
+            tuple(data.get("minimap_color", [0, 0, 0])),
+            terrains,
+        )

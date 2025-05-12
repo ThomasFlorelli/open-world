@@ -5,7 +5,7 @@ from generation_config import GenerationConfig
 from noise_map import NoiseMap
 from threshold_selector import ThresholdSelector
 
-CHUNK_GC_DISTANCE = 3
+CHUNK_GC_DISTANCE = 8
 CHUNK_COLD_THRESHOLD = 2  # number of cold pass before collection
 
 
